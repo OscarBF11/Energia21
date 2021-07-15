@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace proyecto.BD
+﻿namespace WebApplication2.BD
 {
     public class Usuario
     {
-        public int idUsuario;
+        public int IdUsuario;
         public string Nombre;
         public string Correo;
         public string Contraseña;

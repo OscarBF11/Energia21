@@ -3,44 +3,44 @@ using System.Data.SqlClient;
 
 namespace WebApplication2.BD
 {
-    public class DALUsuario
+    public class DALFacturacion
     {
         DbConnect cnx;
 
         // CRUD
-        public DALUsuario()
+        public DALFacturacion()
         {
             cnx = new DbConnect();
-            Console.WriteLine("te has connectado");
+            Console.WriteLine("Te has connectado");
         }
 
-        public void InsertUsuario(Usuario us)
+        public void InsertFacturacion(Facturacion us)
         {
-            try 
+            try
             {
-                string sql = @"INSERT INTO USUARIO 
-                    (Nombre, Correo, Contraseña, RIdSitio)
-                    VALUES (@pNombre,@pCorreo,@pContraseña,null)";
+                string sql = @"INSERT INTO FACTURACION_ENERGIA 
+                    (datetime, geo_name, price)
+                    VALUES (@pDateTime,@pGeoName,@pPrice)";
 
                 SqlCommand cmd = new SqlCommand(sql, cnx.MiCnx);
 
-                SqlParameter pNombre = new SqlParameter("@pNombre", System.Data.SqlDbType.NVarChar, 50);
-                pNombre.Value = us.Nombre;
-                SqlParameter pCorreo = new SqlParameter("@pCorreo", System.Data.SqlDbType.NVarChar, 50);
-                pCorreo.Value = us.Correo;
-                SqlParameter pContraseña = new SqlParameter("@pContraseña", System.Data.SqlDbType.NVarChar, 50);
-                pContraseña.Value = us.Contraseña;
-               
-                cmd.Parameters.Add(pNombre);
-                cmd.Parameters.Add(pCorreo);
-                cmd.Parameters.Add(pContraseña);
-                
+                SqlParameter pDateTime = new SqlParameter("@pDateTime", System.Data.SqlDbType.DateTime, 50);
+                pDateTime.Value = us.Datetime;
+                SqlParameter pGeoName = new SqlParameter("@pGeoName", System.Data.SqlDbType.NVarChar, 20);
+                pGeoName.Value = us.GeoName;
+                SqlParameter pPrice = new SqlParameter("@pPrice", System.Data.SqlDbType.Decimal, 8);
+                pPrice.Value = us.Price;
+
+                cmd.Parameters.Add(pDateTime);
+                cmd.Parameters.Add(pGeoName);
+                cmd.Parameters.Add(pPrice);
+
 
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Eror Insert");                
+                Console.WriteLine("Error Insert");
             }
         }
 
@@ -71,7 +71,7 @@ namespace WebApplication2.BD
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Eror Select");
+                Console.WriteLine("Error Select");
             }
 
             return us;
@@ -92,8 +92,8 @@ namespace WebApplication2.BD
                 SqlParameter pNombre = new SqlParameter("@pNombre", System.Data.SqlDbType.NVarChar, 50);
                 SqlParameter pCorreo = new SqlParameter("@pCorreo", System.Data.SqlDbType.NVarChar, 50);
                 SqlParameter pContraseña = new SqlParameter("@pContraseña", System.Data.SqlDbType.NVarChar, 50);
-                                      
-                
+
+
                 cmd.Parameters.Add(pId);
                 cmd.Parameters.Add(pNombre);
                 cmd.Parameters.Add(pCorreo);
@@ -103,13 +103,13 @@ namespace WebApplication2.BD
                 pNombre.Value = us.Nombre;
                 pCorreo.Value = us.Correo;
                 pContraseña.Value = us.Contraseña;
-               
+
 
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Eror Update");
+                Console.WriteLine("Error Update");
             }
         }
 
@@ -126,7 +126,7 @@ namespace WebApplication2.BD
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Eror Delete");
+                Console.WriteLine("Error Delete");
             }
 
         }
